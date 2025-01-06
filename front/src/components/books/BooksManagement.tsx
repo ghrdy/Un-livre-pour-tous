@@ -206,19 +206,22 @@ export default function BooksManagement() {
             onOpenChange={setShowEditBook}
             onBookUpdated={fetchBooks}
           />
-          <BookDetailView
-            book={selectedBook}
-            onBack={() => setShowBookDetail(false)}
-            onEdit={() => {
-              setShowEditBook(true);
-              setShowBookDetail(false);
-            }}
-            onDelete={() => {
-              handleDeleteBook(selectedBook);
-              setShowBookDetail(false);
-            }}
-          />
         </>
+      )}
+
+      {showBookDetail && selectedBook && (
+        <BookDetailView
+          book={selectedBook}
+          onBack={() => setShowBookDetail(false)}
+          onEdit={() => {
+            setShowEditBook(true);
+            setShowBookDetail(false);
+          }}
+          onDelete={() => {
+            handleDeleteBook(selectedBook);
+            setShowBookDetail(false);
+          }}
+        />
       )}
 
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
