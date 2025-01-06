@@ -211,18 +211,6 @@ export default function ProjectManagement() {
             onOpenChange={setShowEditProject}
             onProjectUpdated={fetchProjects}
           />
-          <ProjectDetailView
-            project={selectedProject}
-            onBack={() => setShowProjectDetail(false)}
-            onEdit={() => {
-              setShowEditProject(true);
-              setShowProjectDetail(false);
-            }}
-            onDelete={() => {
-              handleDeleteProject(selectedProject);
-              setShowProjectDetail(false);
-            }}
-          />
         </>
       )}
 
