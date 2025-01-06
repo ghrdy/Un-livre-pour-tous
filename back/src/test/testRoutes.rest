@@ -1,0 +1,200 @@
+### Login
+POST https://bib-production-4c96.up.railway.app/api/users/login
+Content-Type: application/json
+
+{
+  "email": "test@free.fr",
+  "password": "password"
+}
+
+
+### Login non Admin
+POST https://bib-production-4c96.up.railway.app/api/users/login
+Content-Type: application/json
+
+{
+  "email": "jane.doe@example.com",
+  "password": "newpassword"
+}
+
+### Create a new user (Admin only)
+POST https://bib-production-4c96.up.railway.app/api/users/add
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzVmNDAwMjQ4Y2FkOThlZTBhYzM3NSIsInJvbGUiOiJyZWZlcmVudCIsImlhdCI6MTczMTU5Mjk0NywiZXhwIjoxNzMxNTk2NTQ3fQ.-vBuEqWjdMMjO7t28vsQoetP7lOODYKdfrmGL5qkS9g
+
+{
+  "nom": "oe",
+  "prenom": "oee",
+  "email": "tim.hrdy.1@gmail.com",
+  "password": "password",
+  "role": "admin"
+}
+
+### Get all users (Admin only)
+GET https://bib-production-4c96.up.railway.app/api/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzVmNWM0ZjlhNGJiN2JmNjY2NjI2MiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMTU5MTUzMSwiZXhwIjoxNzMxNTk1MTMxfQ.5MKJUf-BxQL2EBJzQOVahaHZx4DedGbVozI1neZBau0
+
+### Update a user (Admin only)
+PUT https://bib-production-4c96.up.railway.app/api/users/6735f400248cad98ee0ac375
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzVmNWM0ZjlhNGJiN2JmNjY2NjI2MiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMTU5MTUzMSwiZXhwIjoxNzMxNTk1MTMxfQ.5MKJUf-BxQL2EBJzQOVahaHZx4DedGbVozI1neZBau0
+
+{
+  "nom": "Doe",
+  "prenom": "Jane",
+  "email": "jane.doe@example.com",
+  "password": "newpassword",
+  "role": "referent"
+}
+
+### Delete a user (Admin only)
+DELETE https://bib-production-4c96.up.railway.app/api/users/6735fd8043f1583fe581afa2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzVmNWM0ZjlhNGJiN2JmNjY2NjI2MiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMTU5MTY4MSwiZXhwIjoxNzMxNTk1MjgxfQ.DwGc3J5u1YRPWjnXbRAcX-yJcRkiOR5zDZjMsxGCZn0
+
+### Create a new project (Admin only)
+POST https://bib-production-4c96.up.railway.app/api/projects
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzVmNWM0ZjlhNGJiN2JmNjY2NjI2MiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMTU5MTY4MSwiZXhwIjoxNzMxNTk1MjgxfQ.DwGc3J5u1YRPWjnXbRAcX-yJcRkiOR5zDZjMsxGCZn0
+
+{
+  "image": "image_url",
+  "nom": "Project Name",
+  "annee": 2023
+}
+
+### Get all projects
+GET https://bib-production-4c96.up.railway.app/api/projects
+Authorization:  
+
+### Get a single project
+GET https://bib-production-4c96.up.railway.app/api/projects/555555555555555
+Authorization:  
+
+### Update a project (Admin only)
+PUT https://bib-production-4c96.up.railway.app/api/projects/555555555555555
+Content-Type: application/json
+Authorization:  
+
+{
+  "image": "new_image_url",
+  "nom": "Updated Project Name",
+  "annee": 2024
+}
+
+### Delete a project (Admin only)
+DELETE https://bib-production-4c96.up.railway.app/api/projects/555555555555
+Authorization:  
+
+
+### Get all images
+GET https://bib-production-4c96.up.railway.app/api/upload
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzVmNWM0ZjlhNGJiN2JmNjY2NjI2MiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMTYzMTQyNSwiZXhwIjoxNzMxNjMyMzI1fQ.cWZHYhrs0FINHUP_BcN3uU4GGEzIlYLtvmFU-BYIsc4
+
+### Create a new child profile
+POST https://bib-production-4c96.up.railway.app/api/childProfiles
+Content-Type: multipart/form-data
+Authorization:  
+
+{
+  "nom": "Child",
+  "prenom": "Profile",
+  "dateNaissance": "2010-01-01",
+  "classeSuivie": "5th Grade",
+  "noteObservation": "Good student",
+  "parentId": "555555555555555",
+  "photo": "path/to/photo.jpg"
+}
+
+### Get all child profiles
+GET https://bib-production-4c96.up.railway.app/api/childProfiles
+Authorization:  
+
+### Get a single child profile
+GET https://bib-production-4c96.up.railway.app/api/childProfiles/555555555555555
+Authorization:  
+
+### Update a child profile
+PUT https://bib-production-4c96.up.railway.app/api/childProfiles/555555555555555
+Content-Type: multipart/form-data
+Authorization:  
+
+{
+  "nom": "Updated Child",
+  "prenom": "Profile",
+  "dateNaissance": "2010-01-01",
+  "classeSuivie": "6th Grade",
+  "noteObservation": "Excellent student",
+  "parentId": "555555555555555",
+  "photo": "path/to/new_photo.jpg"
+}
+
+### Delete a child profile
+DELETE https://bib-production-4c96.up.railway.app/api/childProfiles/555555555555
+Authorization:  
+
+### Create a new book loan
+POST https://bib-production-4c96.up.railway.app/api/bookLoans
+Content-Type: application/json
+Authorization:  
+
+{
+  "bookTitle": "Book Title",
+  "userId": "555555555555555",
+  "returnDate": "2023-12-31"
+}
+
+### Get all book loans
+GET https://bib-production-4c96.up.railway.app/api/bookLoans
+Authorization:  
+
+### Get a single book loan
+GET https://bib-production-4c96.up.railway.app/api/bookLoans/555555555555555
+Authorization:  
+
+### Update a book loan
+PUT https://bib-production-4c96.up.railway.app/api/bookLoans/555555555555555
+Content-Type: application/json
+Authorization:  
+
+{
+  "bookTitle": "Updated Book Title",
+  "userId": "555555555555555",
+  "returnDate": "2024-01-31"
+}
+
+### Delete a book loan
+DELETE https://bib-production-4c96.up.railway.app/api/bookLoans/xxxxx
+Authorization:  
+
+### Create a new book
+POST https://bib-production-4c96.up.railway.app/api/books
+Content-Type: application/json
+Authorization:  
+
+{
+  "titre": "Le Petit Prince",
+  "photo": "path/to/le_petit_prince.jpg"
+}
+
+### Get all books
+GET https://bib-production-4c96.up.railway.app/api/books
+Authorization:  
+
+### Get a single book
+GET https://bib-production-4c96.up.railway.app/api/books/xxxxx
+Authorization:  
+
+### Update a book
+PUT https://bib-production-4c96.up.railway.app/api/books/xxxxx
+Content-Type: application/json
+Authorization:  
+
+{
+  "titre": "Le Petit Prince (Updated)",
+  "photo": "path/to/le_petit_prince_updated.jpg"
+}
+
+### Delete a book
+DELETE https://bib-production-4c96.up.railway.app/api/books/xxxxx
+Authorization:  

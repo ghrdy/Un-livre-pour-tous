@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ./back
+      dockerfile: docker/Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://mongo:27017/dev
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
