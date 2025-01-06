@@ -6,40 +6,50 @@ import { API_URL } from "@/lib/api/config";
 const AuthContext = createContext<null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const { refreshToken, logout } = useAuth();
+  const { accessToken, refreshToken, logout, setAccessToken } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const refreshAccessToken = async () => {
-      if (!refreshToken) return;
-
+    const checkAuthStatus = async () => {
       try {
-        const response = await fetch(`${API_URL}/users/token`, {
-          method: "POST",
+        const response = await fetch(`${API_URL}/users/status`, {
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
         });
 
-        if (!response.ok) {
-          throw new Error("Token refresh failed");
+        const data = await response.json();
+
+        if (!data.loggedIn) {
+          throw new Error("Not logged in");
+        }
+
+        // Si nous n'avons pas de token d'accès, essayons de le rafraîchir
+        if (!accessToken) {
+          const refreshResponse = await fetch(`${API_URL}/users/token`, {
+            method: "POST",
+            credentials: "include",
+          });
+
+          if (!refreshResponse.ok) {
+            throw new Error("Token refresh failed");
+          }
+
+          const refreshData = await refreshResponse.json();
+          if (refreshData.accessToken) {
+            setAccessToken(refreshData.accessToken);
+          }
         }
       } catch (error) {
-        console.error("Token refresh failed:", error);
+        console.error("Auth check failed:", error);
         logout();
         navigate("/login");
       }
     };
 
-    // Refresh token when component mounts
-    refreshAccessToken();
+    checkAuthStatus();
 
-    // Set up periodic token refresh (every 14 minutes)
-    const intervalId = setInterval(refreshAccessToken, 14 * 60 * 1000);
-
+    const intervalId = setInterval(checkAuthStatus, 14 * 60 * 1000);
     return () => clearInterval(intervalId);
-  }, [refreshToken, logout, navigate]);
+  }, [accessToken, refreshToken, logout, navigate, setAccessToken]);
 
   return <AuthContext.Provider value={null}>{children}</AuthContext.Provider>;
 }
