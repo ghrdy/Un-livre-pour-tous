@@ -72,10 +72,6 @@ export default function EditUserDialog({
         projet: formData.projet,
       };
 
-      if (formData.password) {
-        updateData.password = formData.password;
-      }
-
       if (!accessToken) {
         throw new Error("No access token available");
       }
@@ -136,21 +132,7 @@ export default function EditUserDialog({
               required
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="password">
-              Nouveau mot de passse (laisser vide pour garder le mot de passe
-              actuel)
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-              placeholder="Entrez un nouveau mot de passe"
-            />
-          </div>
+
           <div className="space-y-2">
             <Label htmlFor="role">Rôle</Label>
             <Select
