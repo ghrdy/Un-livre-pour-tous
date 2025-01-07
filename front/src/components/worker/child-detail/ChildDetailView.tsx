@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BookPlus, Pencil, Trash2 } from "lucide-react";
 import { ProfileAvatar } from "@/components/ui/profile-avatar";
