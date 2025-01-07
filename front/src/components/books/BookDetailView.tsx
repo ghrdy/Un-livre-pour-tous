@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  AlertTriangle,
-  BookPlus,
-  Pencil,
-  Trash2,
-} from "lucide-react";
+import { ArrowLeft, BookPlus, Pencil, Trash2 } from "lucide-react";
 import { ProfileAvatar } from "@/components/ui/profile-avatar";
 import { Book } from "@/lib/api/books";
 
@@ -22,8 +16,6 @@ export function BookDetailView({
   onEdit,
   onDelete,
 }: BookDetailViewProps) {
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-
   const handleDelete = () => {
     onDelete();
   };
