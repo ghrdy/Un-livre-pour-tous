@@ -5,16 +5,7 @@ import { ProfileAvatar } from "@/components/ui/profile-avatar";
 import { ChildStatus } from "./ChildStatus";
 import { formatDate } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+
 import { ChildProfile } from "@/lib/api/children";
 
 interface ChildDetailViewProps {
