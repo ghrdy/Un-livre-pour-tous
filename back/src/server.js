@@ -64,7 +64,7 @@ db.once("open", async () => {
 });
 
 app.use("/api/users", userRoutes);
-app.use("/api/upload", uploadRoutes);
+app.use("/api/uploads", uploadRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/childProfiles", childProfileRoutes);
 app.use("/api/books", bookRoutes);
