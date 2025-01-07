@@ -105,7 +105,7 @@ export function ChildDetailView({
             <Button
               variant="outline"
               className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
-              onClick={() => setShowDeleteDialog(true)}
+              onClick={handleDelete}
             >
               <Trash2 className="mr-2 h-4 w-4" />
               Supprimer la fiche
@@ -113,27 +113,6 @@ export function ChildDetailView({
           </div>
         </div>
       </div>
-
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Êtes-vous sûr ?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Cette action est irréversible. La fiche de {child.prenom}{" "}
-              {child.nom} sera définitivement supprimée.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Annuler</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              className="bg-red-600 hover:bg-red-700 focus:ring-red-600"
-            >
-              Supprimer
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 }
