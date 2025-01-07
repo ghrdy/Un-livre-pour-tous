@@ -10,6 +10,8 @@ services:
       - MONGO_URL=mongodb://mongo:27017/dev
     depends_on:
       - mongo
+    volumes:
+      - ./back/uploads:/app/uploads  # Ajoutez cette ligne
 
   frontend:
     build:
