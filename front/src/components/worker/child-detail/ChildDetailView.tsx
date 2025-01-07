@@ -25,10 +25,7 @@ export function ChildDetailView({
   onEdit,
   onDelete,
 }: ChildDetailViewProps) {
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-
   const handleDelete = () => {
-    setShowDeleteDialog(false);
     onDelete();
   };
 
