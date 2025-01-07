@@ -52,8 +52,7 @@ export function ChildDetailView({
           <div className="flex items-center space-x-2">
             <span className="text-sm font-medium">Restreindre</span>
             <Switch
-              id="restriction"
-              checked={FormData.status === "restreint"}
+              checked={child.status === "restreint"}
               onCheckedChange={() => onRestrict()}
             />
           </div>
