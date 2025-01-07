@@ -18,11 +18,7 @@ export default function HomePage() {
             <Logo className="inline-block h-48 w-48 mb-2" />
           </h1>
         </div>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Une plateforme moderne et intuitive conçue pour simplifier les
-          opérations de bibliothèque et améliorer l'expérience de lecture pour
-          tous.
-        </p>
+
         {!isAuthenticated && (
           <div className="flex justify-center gap-4">
             <Link to="/login">
