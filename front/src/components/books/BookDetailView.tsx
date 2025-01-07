@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
@@ -8,16 +7,6 @@ import {
   Trash2,
 } from "lucide-react";
 import { ProfileAvatar } from "@/components/ui/profile-avatar";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Book } from "@/lib/api/books";
 
 interface BookDetailViewProps {
@@ -36,7 +25,6 @@ export function BookDetailView({
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const handleDelete = () => {
-    setShowDeleteDialog(false);
     onDelete();
   };
 
@@ -70,38 +58,13 @@ export function BookDetailView({
           <Button
             variant="outline"
             className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 mt-4"
-            onClick={() => setShowDeleteDialog(true)}
+            onClick={handleDelete}
           >
             <Trash2 className="mr-2 h-4 w-4" />
             Supprimer le livre
           </Button>
         </div>
       </div>
-
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              <AlertTriangle className="mr-2 h-5 w-5 text-red-600" />
-              Êtes-vous sûr ?
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              Cette action est irréversible. Le livre sera définitivement
-              supprimé.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Annuler</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              className="bg-red-600 hover:bg-red-700 focus:ring-red-600"
-            >
-              <Trash2 className="mr-2 h-4 w-4" />
-              Supprimer
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
 
       <div className="fixed bottom-4 right-4">
         <Button variant="default" size="icon" onClick={onEdit}>
