@@ -11,7 +11,9 @@ services:
     depends_on:
       - mongo
     volumes:
-      - ./back/uploads:/app/uploads  # Ajoutez cette ligne
+      - ./back/uploads:/app/uploads
+    networks:
+      - internal
 
   frontend:
     build:
@@ -23,13 +25,21 @@ services:
       - NODE_ENV=production
     depends_on:
       - backend
+    networks:
+      - internal
+      - traefik
 
   mongo:
     image: mongo:latest
-    ports:
-      - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - internal
 
 volumes:
   mongo-data:
+
+networks:
+  internal:
+    driver: bridge
+  
