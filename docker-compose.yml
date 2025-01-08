@@ -27,7 +27,6 @@ services:
       - backend
     networks:
       - internal
-      - traefik
 
   mongo:
     image: mongo:latest
