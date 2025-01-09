@@ -39,9 +39,7 @@ export default function AddBookDialog({
 
       const formDataToSend = new FormData();
       formDataToSend.append("titre", formData.titre);
-      if (formData.photo) {
-        formDataToSend.append("photo", formData.photo);
-      }
+      formDataToSend.append("photo", formData.photo);
 
       await createBook(formDataToSend, accessToken);
       toast.success("Le livre a été ajouté");
@@ -91,6 +89,7 @@ export default function AddBookDialog({
               type="file"
               accept="image/*"
               onChange={handleFileChange}
+              required
             />
           </div>
           <Button type="submit" className="w-full">
