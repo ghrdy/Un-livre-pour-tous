@@ -62,6 +62,11 @@ export function AddUserDialog({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!formData.role) {
+      toast.error("Veuillez choisir un rôle");
+      return;
+    }
+
     try {
       if (!accessToken) {
         throw new Error("No access token available");
