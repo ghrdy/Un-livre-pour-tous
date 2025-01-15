@@ -82,12 +82,7 @@ export function AddUserDialog({
         throw new Error("No access token available");
       }
 
-      const dataToSubmit = {
-        ...formData,
-        projet: formData.projet === "none" ? null : formData.projet,
-      };
-
-      await createUser(dataToSubmit, accessToken);
+      await createUser(formData, accessToken);
       toast.success("L'utilisateur est ajouté");
       onUserAdded();
       onOpenChange(false);
