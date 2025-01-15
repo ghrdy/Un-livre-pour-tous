@@ -67,6 +67,16 @@ export function AddUserDialog({
       return;
     }
 
+    if (
+      (formData.role === "referent" && !formData.projet) ||
+      (formData.role === "simple" && !formData.projet)
+    ) {
+      toast.error(
+        "Veuillez choisir un projet pour un animateur / animateur référent"
+      );
+      return;
+    }
+
     try {
       if (!accessToken) {
         throw new Error("No access token available");
