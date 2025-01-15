@@ -167,7 +167,7 @@ export function AddUserDialog({
                 <SelectValue placeholder="Choisir un Projet" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Aucun projet</SelectItem>
+                <SelectItem value="none">Aucun projet</SelectItem>
                 {projects.map((project) => (
                   <SelectItem key={project._id} value={project._id}>
                     {project.nom} ({project.annee})
