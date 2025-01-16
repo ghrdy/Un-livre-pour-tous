@@ -183,7 +183,7 @@ export default function EditUserDialog({
                     ? projects.find(
                         (project) => project._id === formData.projet
                       )?.nom || "Choisir un Projet"
-                    : "Choisir un Projet"}
+                    : "Aucun Projet"}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
