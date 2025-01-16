@@ -63,6 +63,21 @@ export default function EditUserDialog({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!formData.role) {
+      toast.error("Veuillez choisir un rôle");
+      return;
+    }
+
+    if (
+      (formData.role === "referent" && !formData.projet) ||
+      (formData.role === "simple" && !formData.projet)
+    ) {
+      toast.error(
+        "Veuillez choisir un projet pour un animateur / animateur référent"
+      );
+      return;
+    }
+
     try {
       const updateData: UpdateUserData = {
         nom: formData.nom,
