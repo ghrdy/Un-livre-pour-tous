@@ -21,7 +21,7 @@ const projectSchema = new mongoose.Schema({
   ],
   projet: {
     type: String,
-    default: "none",
+    default: "",
   },
 });
 
