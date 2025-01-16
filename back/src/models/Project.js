@@ -20,8 +20,9 @@ const projectSchema = new mongoose.Schema({
     },
   ],
   projet: {
-    type: String,
-    default: "",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
+    default: null,
   },
 });
 
