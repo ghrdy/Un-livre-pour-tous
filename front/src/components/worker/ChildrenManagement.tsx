@@ -138,7 +138,11 @@ export default function ChildrenManagement() {
 
     try {
       const newStatus =
-        selectedChild.status === "restreint" ? "possible" : "restreint";
+        selectedChild.status === "restreint"
+          ? selectedChild.hasLoan
+            ? "retour"
+            : "possible"
+          : "restreint";
       const formData = new FormData();
       formData.append("status", newStatus);
       await updateChildProfile(selectedChild._id, formData, accessToken);
