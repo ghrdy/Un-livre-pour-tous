@@ -31,7 +31,7 @@ const initialFormData = {
   nom: "",
   email: "",
   role: "",
-  projet: "",
+  projet: null,
 };
 
 export function AddUserDialog({
@@ -163,9 +163,12 @@ export function AddUserDialog({
           <div className="space-y-2">
             <Label htmlFor="projet">Projet</Label>
             <Select
-              value={formData.projet}
+              value={formData.projet || "none"}
               onValueChange={(value) =>
-                setFormData({ ...formData, projet: value })
+                setFormData({
+                  ...formData,
+                  projet: value === "none" ? null : value,
+                })
               }
             >
               <SelectTrigger>

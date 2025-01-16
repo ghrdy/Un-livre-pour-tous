@@ -5,7 +5,7 @@ export interface User {
   prenom: string;
   email: string;
   role: 'admin' | 'referent' | 'simple';
-  projet?: string;
+  projet?: string | null;
   validated: boolean;
 }
 
@@ -24,7 +24,7 @@ export interface UpdateUserData {
   email?: string;
   password?: string;
   role?: string;
-  projet?: string;
+  projet?: string | null;
 }
 
 
