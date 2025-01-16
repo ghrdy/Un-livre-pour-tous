@@ -1,14 +1,34 @@
 import mongoose from "mongoose";
 
 const childProfileSchema = new mongoose.Schema({
-  nom: String,
-  prenom: String,
-  dateNaissance: Date,
-  classeSuivie: String,
-  noteObservation: String,
+  nom: {
+    type: String,
+    required: true,
+  },
+  prenom: {
+    type: String,
+    required: true,
+  },
+  dateNaissance: {
+    type: Date,
+    required: true,
+  },
+  classeSuivie: {
+    type: String,
+    required: true,
+  },
+  noteObservation: {
+    type: String,
+  },
   photo: String, // URL or path to the photo
-  status: String,
-  hasLoan: Boolean,
+  status: {
+    type: String,
+    required: true,
+  },
+  hasLoan: {
+    type: Boolean,
+    required: true,
+  },
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
