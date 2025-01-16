@@ -89,20 +89,30 @@ export async function updateBookLoan(id: string, data: UpdateBookLoanData, token
 }
 
 export async function deleteBookLoan(id: string, token: string): Promise<void> {
-  // Fetch the book loan before deleting it
-  const bookLoanResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
+  // Fetch the book loan to get the childId
+  const loanResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
     headers: {
       'Cookie': `accessToken=${token}`,
     },
     credentials: 'include',
   });
 
-  if (!bookLoanResponse.ok) {
-    const error = await bookLoanResponse.json();
-    throw new Error(error.message || 'Failed to fetch book loan');
+  if (!loanResponse.ok) {
+    throw new Error('Failed to fetch book loan');
   }
 
-  const bookLoan = await bookLoanResponse.json();
+  const loanData: BookLoan = await loanResponse.json();
+
+  // Update hasLoan property to false
+  await fetch(`${API_URL}/childProfiles/${loanData.childId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': `accessToken=${token}`,
+    },
+    credentials: 'include',
+    body: JSON.stringify({ hasLoan: false }),
+  });
 
   // Delete the book loan
   const response = await fetch(`${API_URL}/bookLoans/${id}`, {
@@ -114,18 +124,6 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Failed to delete book loan');
+    throw new Error('Failed to delete book loan');
   }
-
-  // Update hasLoan property
-  await fetch(`${API_URL}/childProfiles/${bookLoan.childId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Cookie': `accessToken=${token}`,
-    },
-    credentials: 'include',
-    body: JSON.stringify({ hasLoan: false }),
-  });
 }
