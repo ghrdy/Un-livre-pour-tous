@@ -181,6 +181,7 @@ export default function EditUserDialog({
                 <SelectValue placeholder="Choisir un Projet" />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="">Aucun Projet</SelectItem>
                 {projects.map((project) => (
                   <SelectItem key={project._id} value={project._id}>
                     {project.nom} ({project.annee})
