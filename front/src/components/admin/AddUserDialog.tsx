@@ -31,7 +31,7 @@ const initialFormData = {
   nom: "",
   email: "",
   role: "",
-  projet: null,
+  projet: null as string | null,
 };
 
 export function AddUserDialog({
