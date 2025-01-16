@@ -15,7 +15,7 @@ export interface CreateUserData {
   email: string;
   password?: string;
   role: string;
-  projet?: string;
+  projet?: string | null;
 }
 
 export interface UpdateUserData {

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
-import { createUser } from "@/lib/api/users";
+import { createUser, CreateUserData } from "@/lib/api/users";
 import { getProjects, Project } from "@/lib/api/projects";
 import { useAuth } from "@/lib/auth";
 
@@ -82,7 +82,7 @@ export function AddUserDialog({
         throw new Error("No access token available");
       }
 
-      const dataToSubmit = {
+      const dataToSubmit: CreateUserData = {
         ...formData,
         projet: formData.projet === "none" ? null : formData.projet,
       };

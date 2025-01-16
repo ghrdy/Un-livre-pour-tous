@@ -3,20 +3,26 @@ import mongoose from "mongoose";
 const projectSchema = new mongoose.Schema({
   image: {
     type: String,
-    default: null
+    default: null,
   },
   nom: {
     type: String,
-    required: true
+    required: true,
   },
   annee: {
     type: Number,
-    required: true
+    required: true,
   },
-  animateurs: [{ 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "User" 
-  }],
+  animateurs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  projet: {
+    type: String,
+    default: "none",
+  },
 });
 
 export default mongoose.model("Project", projectSchema);
