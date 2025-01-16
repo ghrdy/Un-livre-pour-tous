@@ -28,6 +28,7 @@ const childProfileSchema = new mongoose.Schema({
   hasLoan: {
     type: Boolean,
     required: true,
+    default: false,
   },
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
