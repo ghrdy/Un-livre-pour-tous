@@ -49,7 +49,10 @@ export default function EditUserDialog({
       try {
         if (!accessToken) return;
         const fetchedProjects = await getProjects(accessToken);
-        setProjects(fetchedProjects);
+        setProjects([
+          { _id: "none", nom: "Aucun Projet", annee: "" },
+          ...fetchedProjects,
+        ]);
       } catch (error) {
         toast.error("Échec du chargement des projets");
       }
@@ -187,10 +190,9 @@ export default function EditUserDialog({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="none">Aucun Projet</SelectItem>
                 {projects.map((project) => (
                   <SelectItem key={project._id} value={project._id}>
-                    {project.nom} ({project.annee})
+                    {project.nom} {project.annee && `(${project.annee})`}
                   </SelectItem>
                 ))}
               </SelectContent>
