@@ -137,11 +137,31 @@ export default function ChildrenManagement() {
     if (!selectedChild || !accessToken) return;
 
     try {
+      const newStatus =
+        selectedChild.status === "restreint" ? "possible" : "restreint";
       const formData = new FormData();
-      formData.append("status", "restreint");
+      formData.append("status", newStatus);
       await updateChildProfile(selectedChild._id, formData, accessToken);
       toast.success("Statut mis à jour");
-      fetchChildren();
+
+      // Update the status in the state
+      setSelectedChild((prevChild) =>
+        prevChild ? { ...prevChild, status: newStatus } : null
+      );
+      setChildren((prevChildren) =>
+        prevChildren.map((child) =>
+          child._id === selectedChild._id
+            ? { ...child, status: newStatus }
+            : child
+        )
+      );
+      setFilteredChildren((prevFiltered) =>
+        prevFiltered.map((child) =>
+          child._id === selectedChild._id
+            ? { ...child, status: newStatus }
+            : child
+        )
+      );
     } catch (error) {
       toast.error("Échec de la mise à jour du statut");
     }
