@@ -8,6 +8,7 @@ const childProfileSchema = new mongoose.Schema({
   noteObservation: String,
   photo: String, // URL or path to the photo
   status: String,
+  hasLoan: Boolean,
   parentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
