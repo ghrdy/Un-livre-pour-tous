@@ -49,10 +49,7 @@ export default function EditUserDialog({
       try {
         if (!accessToken) return;
         const fetchedProjects = await getProjects(accessToken);
-        setProjects([
-          { _id: "none", nom: "Aucun Projet", annee: "" },
-          ...fetchedProjects,
-        ]);
+        setProjects(fetchedProjects);
       } catch (error) {
         toast.error("Échec du chargement des projets");
       }
