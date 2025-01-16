@@ -120,6 +120,10 @@ export default function ChildLoansDialog({
     }
   }, [open, accessToken, child._id]);
 
+  useEffect(() => {
+    fetchLoans();
+  }, [accessToken, child._id]);
+
   const handleAddLoanClick = async () => {
     if (loans.length > 0) {
       toast.error("L'enfant a déjà un emprunt en cours");
