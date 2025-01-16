@@ -56,8 +56,8 @@ export async function createBookLoan(data: CreateBookLoanData, token: string): P
   }
 
   // Update hasLoan property
-  await fetch(`${API_URL}/children/${data.childId}/hasLoan`, {
-    method: 'PATCH',
+  await fetch(`${API_URL}/children/${data.childId}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Cookie': `accessToken=${token}`,
@@ -104,8 +104,8 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
 
   // Update hasLoan property
   const bookLoan = await response.json();
-  await fetch(`${API_URL}/children/${bookLoan.childId}/hasLoan`, {
-    method: 'PATCH',
+  await fetch(`${API_URL}/children/${bookLoan.childId}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       'Cookie': `accessToken=${token}`,
