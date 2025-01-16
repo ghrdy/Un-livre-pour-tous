@@ -47,11 +47,7 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 // Protected route for serving static files from the uploads directory
-app.use(
-  "/uploads",
-  authenticateToken,
-  express.static(path.join(__dirname, "../uploads"))
-);
+app.use("/uploads", authenticateToken, express.static(uploadsDir));
 
 // MongoDB connection
 mongoose.connect("mongodb://mongo:27017");
