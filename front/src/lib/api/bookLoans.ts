@@ -104,8 +104,12 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
   const loanData: BookLoan = await loanResponse.json();
   const childId = loanData.childId;
 
+  if (!childId) {
+    throw new Error('Child ID not found in the loan data');
+  }
+
   // Update hasLoan property of the child
-  await fetch(`${API_URL}/childProfiles/${childId}`, {
+  const updateResponse = await fetch(`${API_URL}/childProfiles/${childId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -114,6 +118,11 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
     credentials: 'include',
     body: JSON.stringify({ hasLoan: false }),
   });
+
+  if (!updateResponse.ok) {
+    const error = await updateResponse.json();
+    throw new Error(error.message || 'Failed to update child profile');
+  }
 
   // Delete the book loan
   const deleteResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
