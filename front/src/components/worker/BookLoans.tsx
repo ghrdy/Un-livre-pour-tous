@@ -87,6 +87,7 @@ export default function ChildLoansDialog({
         updateChildStatus("possible");
       }
     } catch (error) {
+      console.error("Failed to fetch book loans:", error);
       toast.error("Echec lors de la récupération des emprunts");
     }
   };
@@ -203,6 +204,7 @@ export default function ChildLoansDialog({
       toast.success("Le livre a été retourné avec succès");
       fetchLoans();
     } catch (error) {
+      console.error("Failed to delete book loan:", error);
       toast.error("Echec lors du retour du livre");
     } finally {
       setShowReturnDialog(false);
