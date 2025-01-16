@@ -89,7 +89,7 @@ export async function updateBookLoan(id: string, data: UpdateBookLoanData, token
 }
 
 export async function deleteBookLoan(id: string, token: string): Promise<void> {
-  // Fetch the book loan to get the userId
+  // Fetch the book loan to get the childId
   const loanResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
     headers: {
       'Cookie': `accessToken=${token}`,
@@ -102,31 +102,10 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
   }
 
   const loanData: BookLoan = await loanResponse.json();
-  const userId = loanData.childId; // Assuming childId is the userId
+  const childId = loanData.childId;
 
-  // Fetch the book loans by userId to get the childId
-  const userLoansResponse = await fetch(`${API_URL}/bookLoans/${userId}`, {
-    headers: {
-      'Cookie': `accessToken=${token}`,
-    },
-    credentials: 'include',
-  });
-
-  if (!userLoansResponse.ok) {
-    throw new Error('Failed to fetch book loans');
-  }
-
-  const userLoans: BookLoan[] = await userLoansResponse.json();
-
-  // Assuming we delete the first loan found for the user
-  if (userLoans.length === 0) {
-    throw new Error('No book loans found for the user');
-  }
-
-  const loan = userLoans[0];
-
-  // Update hasLoan property to false
-  await fetch(`${API_URL}/childProfiles/${loan.childId}`, {
+  // Update hasLoan property of the child
+  await fetch(`${API_URL}/childProfiles/${childId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -137,7 +116,7 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
   });
 
   // Delete the book loan
-  const response = await fetch(`${API_URL}/bookLoans/${loan._id}`, {
+  const deleteResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
     method: 'DELETE',
     headers: {
       'Cookie': `accessToken=${token}`,
@@ -145,7 +124,8 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
     credentials: 'include',
   });
 
-  if (!response.ok) {
-    throw new Error('Failed to delete book loan');
+  if (!deleteResponse.ok) {
+    const error = await deleteResponse.json();
+    throw new Error(error.message || 'Failed to delete book loan');
   }
 }
