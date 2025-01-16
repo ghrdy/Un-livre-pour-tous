@@ -89,6 +89,22 @@ export async function updateBookLoan(id: string, data: UpdateBookLoanData, token
 }
 
 export async function deleteBookLoan(id: string, token: string): Promise<void> {
+  // Fetch the book loan before deleting it
+  const bookLoanResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
+    headers: {
+      'Cookie': `accessToken=${token}`,
+    },
+    credentials: 'include',
+  });
+
+  if (!bookLoanResponse.ok) {
+    const error = await bookLoanResponse.json();
+    throw new Error(error.message || 'Failed to fetch book loan');
+  }
+
+  const bookLoan = await bookLoanResponse.json();
+
+  // Delete the book loan
   const response = await fetch(`${API_URL}/bookLoans/${id}`, {
     method: 'DELETE',
     headers: {
@@ -103,7 +119,6 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
   }
 
   // Update hasLoan property
-  const bookLoan = await response.json();
   await fetch(`${API_URL}/childProfiles/${bookLoan.childId}`, {
     method: 'PUT',
     headers: {
