@@ -121,7 +121,18 @@ export default function ChildLoansDialog({
   }, [open, accessToken, child._id]);
 
   useEffect(() => {
-    fetchLoans();
+    const refreshData = async () => {
+      await fetchLoans();
+      // Update child status based on active loans
+      const hasActiveLoan = loans.length > 0;
+      if (hasActiveLoan && child.status === "possible") {
+        await updateChildStatus("retour");
+      } else if (!hasActiveLoan && child.status === "retour") {
+        await updateChildStatus("possible");
+      }
+    };
+
+    refreshData();
   }, [accessToken, child._id]);
 
   const handleAddLoanClick = async () => {
