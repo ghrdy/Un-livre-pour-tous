@@ -84,7 +84,8 @@ export default function EditUserDialog({
         prenom: formData.prenom,
         email: formData.email,
         role: formData.role,
-        projet: formData.projet,
+        // Conditionally include the projet field
+        ...(formData.projet && { projet: formData.projet }),
       };
 
       if (!accessToken) {
