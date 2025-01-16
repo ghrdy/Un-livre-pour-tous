@@ -28,6 +28,7 @@ router.post("/", canManageChildProfiles, upload, async (req, res) => {
     noteObservation,
     parentId,
     status,
+    hasLoan,
   } = req.body;
   const photo = req.file ? `/uploads/${req.file.filename}` : null;
   const newChildProfile = new ChildProfile({
@@ -39,6 +40,7 @@ router.post("/", canManageChildProfiles, upload, async (req, res) => {
     photo,
     parentId,
     status,
+    hasLoan,
   });
   try {
     const savedChildProfile = await newChildProfile.save();
@@ -82,6 +84,7 @@ router.put("/:id", canManageChildProfiles, upload, async (req, res) => {
     noteObservation,
     parentId,
     status,
+    hasLoan,
   } = req.body;
   const photo = req.file ? `/uploads/${req.file.filename}` : undefined;
   try {
@@ -93,6 +96,7 @@ router.put("/:id", canManageChildProfiles, upload, async (req, res) => {
       noteObservation,
       parentId,
       status,
+      hasLoan,
     };
 
     if (photo) {

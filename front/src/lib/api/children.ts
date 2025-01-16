@@ -9,6 +9,7 @@ export interface ChildProfile {
   photo: string | null;
   parentId: string;
   status: string;
+  hasLoan: boolean;
 }
 
 export interface CreateChildProfileData extends FormData {}
