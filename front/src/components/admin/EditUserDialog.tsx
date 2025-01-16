@@ -178,7 +178,13 @@ export default function EditUserDialog({
               }
             >
               <SelectTrigger>
-                <SelectValue placeholder="Choisir un Projet" />
+                <SelectValue>
+                  {formData.projet
+                    ? projects.find(
+                        (project) => project._id === formData.projet
+                      )?.nom || "Choisir un Projet"
+                    : "Choisir un Projet"}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="none">Aucun Projet</SelectItem>
