@@ -55,6 +55,17 @@ export async function createBookLoan(data: CreateBookLoanData, token: string): P
     throw new Error(error.message || 'Failed to create book loan');
   }
 
+  // Update hasLoan property
+  await fetch(`${API_URL}/children/${data.childId}/hasLoan`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': `accessToken=${token}`,
+    },
+    credentials: 'include',
+    body: JSON.stringify({ hasLoan: true }),
+  });
+
   return response.json();
 }
 
@@ -90,4 +101,16 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
     const error = await response.json();
     throw new Error(error.message || 'Failed to delete book loan');
   }
+
+  // Update hasLoan property
+  const bookLoan = await response.json();
+  await fetch(`${API_URL}/children/${bookLoan.childId}/hasLoan`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': `accessToken=${token}`,
+    },
+    credentials: 'include',
+    body: JSON.stringify({ hasLoan: false }),
+  });
 }
