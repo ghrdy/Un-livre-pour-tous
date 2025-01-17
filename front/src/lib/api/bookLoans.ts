@@ -88,11 +88,11 @@ export async function updateBookLoan(id: string, data: UpdateBookLoanData, token
   return response.json();
 }
 
-export async function deleteBookLoan(id: string, token: string): Promise<void> {
+export async function deleteBookLoan(childid: string,loanid: string, token: string): Promise<void> {
   
 
   // Update hasLoan property of the child
-  const updateResponse = await fetch(`${API_URL}/childProfiles/${id}`, {
+  const updateResponse = await fetch(`${API_URL}/childProfiles/${childid}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ export async function deleteBookLoan(id: string, token: string): Promise<void> {
   }
 
   // Delete the book loan
-  const deleteResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
+  const deleteResponse = await fetch(`${API_URL}/bookLoans/${loanid}`, {
     method: 'DELETE',
     headers: {
       'Cookie': `accessToken=${token}`,

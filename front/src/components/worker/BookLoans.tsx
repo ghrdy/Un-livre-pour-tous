@@ -200,7 +200,7 @@ export default function ChildLoansDialog({
     try {
       if (!loanToReturn || !accessToken) return;
 
-      await deleteBookLoan(child._id, accessToken);
+      await deleteBookLoan(child._id, loanToReturn._id, accessToken);
       toast.success("Le livre a été retourné avec succès");
       fetchLoans();
     } catch (error) {
