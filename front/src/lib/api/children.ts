@@ -7,7 +7,7 @@ export interface ChildProfile {
   classeSuivie: string;
   noteObservation: string;
   photo: string | null;
-  parentId: string;
+
   status: string;
   hasLoan: boolean;
 }

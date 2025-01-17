@@ -32,8 +32,6 @@ export default function AddChildDialog({
     classeSuivie: "",
     noteObservation: "",
     photo: null as File | null,
-    parentId: user?.id || "",
-    status: "possible",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,8 +48,6 @@ export default function AddChildDialog({
       formDataToSend.append("dateNaissance", formData.dateNaissance);
       formDataToSend.append("classeSuivie", formData.classeSuivie);
       formDataToSend.append("noteObservation", formData.noteObservation);
-      formDataToSend.append("parentId", formData.parentId);
-      formDataToSend.append("status", formData.status);
       if (formData.photo) {
         formDataToSend.append("photo", formData.photo);
       }
@@ -67,8 +63,6 @@ export default function AddChildDialog({
         classeSuivie: "",
         noteObservation: "",
         photo: null,
-        parentId: user?.id || "",
-        status: "",
       });
     } catch (error) {
       toast.error(

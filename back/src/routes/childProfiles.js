@@ -26,7 +26,6 @@ router.post("/", canManageChildProfiles, upload, async (req, res) => {
     dateNaissance,
     classeSuivie,
     noteObservation,
-    parentId,
     status,
     hasLoan,
   } = req.body;
@@ -38,7 +37,6 @@ router.post("/", canManageChildProfiles, upload, async (req, res) => {
     classeSuivie,
     noteObservation,
     photo,
-    parentId,
     status,
     hasLoan,
   });
@@ -82,7 +80,7 @@ router.put("/:id", canManageChildProfiles, upload, async (req, res) => {
     dateNaissance,
     classeSuivie,
     noteObservation,
-    parentId,
+
     status,
     hasLoan,
   } = req.body;
@@ -94,7 +92,7 @@ router.put("/:id", canManageChildProfiles, upload, async (req, res) => {
       dateNaissance,
       classeSuivie,
       noteObservation,
-      parentId,
+
       status,
       hasLoan,
     };

@@ -23,16 +23,12 @@ const childProfileSchema = new mongoose.Schema({
   photo: String, // URL or path to the photo
   status: {
     type: String,
-    required: true,
+    default: "possible",
   },
   hasLoan: {
     type: Boolean,
     required: true,
     default: false,
-  },
-  parentId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
   },
 });
 
