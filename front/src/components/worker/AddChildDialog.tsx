@@ -24,7 +24,7 @@ export default function AddChildDialog({
   onOpenChange,
   onChildAdded,
 }: AddChildDialogProps) {
-  const { accessToken, user } = useAuth();
+  const { accessToken } = useAuth();
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
