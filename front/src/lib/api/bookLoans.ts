@@ -89,27 +89,10 @@ export async function updateBookLoan(id: string, data: UpdateBookLoanData, token
 }
 
 export async function deleteBookLoan(id: string, token: string): Promise<void> {
-  // Fetch the book loan to get the childId
-  const loanResponse = await fetch(`${API_URL}/bookLoans/${id}`, {
-    headers: {
-      'Cookie': `accessToken=${token}`,
-    },
-    credentials: 'include',
-  });
-
-  if (!loanResponse.ok) {
-    throw new Error('Failed to fetch book loan');
-  }
-
-  const loanData: BookLoan = await loanResponse.json();
-  const childId = loanData.childId;
-
-  if (!childId) {
-    throw new Error('Child ID not found in the loan data');
-  }
+  
 
   // Update hasLoan property of the child
-  const updateResponse = await fetch(`${API_URL}/childProfiles/${childId}`, {
+  const updateResponse = await fetch(`${API_URL}/childProfiles/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
