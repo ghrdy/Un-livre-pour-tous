@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
         prenom: user.prenom,
       },
       secretKey,
-      { expiresIn: "15m" }
+      { expiresIn: "30m" }
     );
 
     const refreshToken = jwt.sign(
@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
     res.cookie("accessToken", token, {
       sameSite: "strict",
       path: "/",
-      maxAge: 15 * 60 * 1000, // 15 minutes
+      maxAge: 30 * 60 * 1000, // 30 minutes
     });
 
     res.cookie("refreshToken", refreshToken, {
@@ -293,14 +293,14 @@ router.post("/token", async (req, res) => {
         },
         secretKey,
         {
-          expiresIn: "15m",
+          expiresIn: "30m",
         }
       );
 
       res.cookie("accessToken", newToken, {
         sameSite: "strict",
         path: "/",
-        maxAge: 15 * 60 * 1000, // 15 minutes
+        maxAge: 30 * 60 * 1000, // 30 minutes
       });
       res.json({ message: "Token refreshed" });
     });
