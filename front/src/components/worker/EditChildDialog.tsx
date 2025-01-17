@@ -99,6 +99,15 @@ export default function EditChildDialog({
     });
   };
 
+  useEffect(() => {
+    if (child) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        status: child.hasLoan ? "retour" : "possible",
+      }));
+    }
+  }, [child]);
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
