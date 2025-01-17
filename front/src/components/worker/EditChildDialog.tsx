@@ -95,18 +95,9 @@ export default function EditChildDialog({
   const handleRestrictionChange = (checked: boolean) => {
     setFormData({
       ...formData,
-      status: checked ? "restreint" : "possible",
+      status: checked ? "restreint" : child.hasLoan ? "retour" : "possible",
     });
   };
-
-  useEffect(() => {
-    if (child) {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        status: child.hasLoan ? "retour" : "possible",
-      }));
-    }
-  }, [child]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
