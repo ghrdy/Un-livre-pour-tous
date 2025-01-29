@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://31.207.39.77:3000", // Origine autorisée
+    origin: process.env.FRONTEND_URL, // Origine autorisée
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Méthodes autorisées
     credentials: true, // Autorise les cookies et les identifiants
     allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
