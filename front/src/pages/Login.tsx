@@ -13,6 +13,7 @@ import {
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
 import { API_URL } from "@/lib/api/config";
+import Logo from "../assets/Logo.svg?react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -66,7 +67,11 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[80vh]">
+    <div className="flex flex-col items-center justify-center min-h-[80vh]">
+      <h1 className="text-5xl font-bold tracking-tight relative">
+        <Logo className="inline-block h-25 w-25 mb-2" />
+      </h1>
+      <h2 className="text-2xl font-semibold mb-4">Connectez vous</h2>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Connexion</CardTitle>
@@ -97,7 +102,15 @@ export default function Login() {
               />
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
-            <Button type="submit" className="w-full">
+            <div className="flex justify-end">
+              <a
+                href="/forgot-password"
+                className="text-blue-500 hover:underline"
+              >
+                Mot de passe oublié ?
+              </a>
+            </div>
+            <Button type="submit" variant="custom" className="w-full">
               Se connecter
             </Button>
           </form>

@@ -165,3 +165,11 @@
     display: block;
   }
 }
+
+.bg-custom {
+  background-color: #2580c3;
+}
+
+.hover\:bg-custom\/90:hover {
+  background-color: #1e6fa1; /* Adjust the hover color as needed */
+}

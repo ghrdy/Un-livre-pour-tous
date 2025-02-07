@@ -22,7 +22,7 @@ export default function HomePage() {
         {!isAuthenticated && (
           <div className="flex justify-center gap-4">
             <Link to="/login">
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" color="primary">
                 Commencer
               </Button>
             </Link>
