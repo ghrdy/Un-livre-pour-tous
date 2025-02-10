@@ -61,17 +61,49 @@ export default function RequestAcess() {
       <h1 className="mt-8 text-2xl font-semibold text-center text-slate-950">
         Demandez un accès
       </h1>
-      <div className="flex flex-col items-end mt-8 w-80 max-w-full text-base text-slate-500">
-        <Label htmlFor="nom" className="mt-4">Nom</Label>
-        <Input id="nom" value={nom} onChange={(e) => setNom(e.target.value)} className="mt-1 mb-4" />
-        <Label htmlFor="prenom" className="mt-4">Prénom</Label>
-        <Input id="prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)} className="mt-1 mb-4" />
-        <Label htmlFor="email" className="mt-4">Email</Label>
-        <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 mb-4" />
-        <Label htmlFor="password" className="mt-4">Mot de passe</Label>
-        <Input id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1 mb-4" />
-        <Label htmlFor="confirmPassword" className="mt-4">Confirmer le mot de passe</Label>
-        <Input id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="mt-1 mb-4" />
+      <div className="flex flex-col items-start mt-8 w-80 max-w-full text-base text-slate-500">
+        <Input
+          id="nom"
+          value={nom}
+          onChange={(e) => setNom(e.target.value)}
+          className="mt-1 mb-4"
+          placeholder="Nom"
+          aria-label="Nom"
+        />
+        <Input
+          id="prenom"
+          value={prenom}
+          onChange={(e) => setPrenom(e.target.value)}
+          className="mt-1 mb-4"
+          placeholder="Prénom"
+          aria-label="Prénom"
+        />
+        <Input
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-1 mb-4"
+          placeholder="Email"
+          aria-label="Email"
+        />
+        <Input
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="mt-1 mb-4"
+          placeholder="Mot de passe"
+          aria-label="Mot de passe"
+          type="password"
+        />
+        <Input
+          id="confirmPassword"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          className="mt-1 mb-4"
+          placeholder="Confirmer le mot de passe"
+          aria-label="Confirmer le mot de passe"
+          type="password"
+        />
       </div>
       <div className="flex flex-col mt-8 w-80 max-w-full text-base">
         <label htmlFor="note" className="font-semibold text-slate-950">
