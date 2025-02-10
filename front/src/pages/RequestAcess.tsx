@@ -133,7 +133,7 @@ export default function RequestAcess() {
           type="text"
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          className="flex-1 shrink self-stretch px-3 py-2 mt-3 w-full whitespace-nowrap bg-white rounded-lg border border-solid border-slate-200 text-slate-500"
+          className="w-full"
           placeholder="Note"
           aria-label="Note à l'admnistrateur (optionnel)"
         />
