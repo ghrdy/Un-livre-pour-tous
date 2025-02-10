@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { API_URL } from "@/lib/api/config";
-
+import Eye from "../assets/Eye.svg?react";
 
 export default function RequestAcess() {
   const navigate = useNavigate();
@@ -15,7 +15,8 @@ export default function RequestAcess() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [note, setNote] = useState<string>("");
   const [error, setError] = useState<string>("");
-
+  const [showPassword, setShowPassword] = useState(false);
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -95,6 +96,10 @@ export default function RequestAcess() {
           aria-label="Mot de passe"
           type="password"
         />
+        <Eye
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+        />
         <Input
           id="confirmPassword"
           value={confirmPassword}
@@ -103,6 +108,10 @@ export default function RequestAcess() {
           placeholder="Confirmer le mot de passe"
           aria-label="Confirmer le mot de passe"
           type="password"
+        />
+        <Eye
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
         />
       </div>
       <div className="flex flex-col mt-8 w-80 max-w-full text-base">
