@@ -93,7 +93,6 @@ export default function RequestAcess() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 mb-4"
             placeholder="Mot de passe"
             aria-label="Mot de passe"
             type={showPassword ? "text" : "password"}
@@ -108,7 +107,6 @@ export default function RequestAcess() {
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="mt-1 mb-4"
             placeholder="Confirmer le mot de passe"
             aria-label="Confirmer le mot de passe"
             type={showConfirmPassword ? "text" : "password"}
