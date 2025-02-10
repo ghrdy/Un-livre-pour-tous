@@ -88,7 +88,7 @@ export default function RequestAcess() {
           placeholder="Email"
           aria-label="Email"
         />
-        <div className="relative">
+        <div className="relative mt-1 mb-4">
           <Input
             id="password"
             value={password}
@@ -102,7 +102,7 @@ export default function RequestAcess() {
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
-        <div className="relative">
+        <div className="relative mt-1 mb-4">
           <Input
             id="confirmPassword"
             value={confirmPassword}
