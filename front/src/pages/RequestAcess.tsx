@@ -68,7 +68,7 @@ export default function RequestAcess() {
           id="nom"
           value={nom}
           onChange={(e) => setNom(e.target.value)}
-          className="mt-1 mb-4"
+          className="mt-1 mb-4 w-full"
           placeholder="Nom"
           aria-label="Nom"
         />
@@ -76,7 +76,7 @@ export default function RequestAcess() {
           id="prenom"
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
-          className="mt-1 mb-4"
+          className="mt-1 mb-4 w-full"
           placeholder="Prénom"
           aria-label="Prénom"
         />
@@ -84,11 +84,11 @@ export default function RequestAcess() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 mb-4"
+          className="mt-1 mb-4 w-full"
           placeholder="Email"
           aria-label="Email"
         />
-        <div className="relative mt-1 mb-4">
+        <div className="relative mt-1 mb-4 w-full">
           <Input
             id="password"
             value={password}
@@ -96,13 +96,14 @@ export default function RequestAcess() {
             placeholder="Mot de passe"
             aria-label="Mot de passe"
             type={showPassword ? "text" : "password"}
+            className="w-full"
           />
           <Eye
             className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
-        <div className="relative mt-1 mb-4">
+        <div className="relative mt-1 mb-4 w-full">
           <Input
             id="confirmPassword"
             value={confirmPassword}
@@ -110,10 +111,11 @@ export default function RequestAcess() {
             placeholder="Confirmer le mot de passe"
             aria-label="Confirmer le mot de passe"
             type={showConfirmPassword ? "text" : "password"}
+            className="w-full"
           />
           <Eye
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                    onClick={() => setShowConfirmPassword(!showPassword)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           />
         </div>
       </div>
