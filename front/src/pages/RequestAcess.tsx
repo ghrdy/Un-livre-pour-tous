@@ -68,7 +68,7 @@ export default function RequestAcess() {
           id="nom"
           value={nom}
           onChange={(e) => setNom(e.target.value)}
-          className="mt-1 mb-4 w-full"
+          className="mt-1 mb-3 w-full"
           placeholder="Nom"
           aria-label="Nom"
           required
@@ -77,7 +77,7 @@ export default function RequestAcess() {
           id="prenom"
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
-          className="mt-1 mb-4 w-full"
+          className="mt-1 mb-3 w-full"
           placeholder="Prénom"
           aria-label="Prénom"
           required
@@ -86,12 +86,12 @@ export default function RequestAcess() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 mb-4 w-full"
+          className="mt-1 mb-3 w-full"
           placeholder="Email"
           aria-label="Email"
           required
         />
-        <div className="relative mt-1 mb-4 w-full">
+        <div className="relative mt-1 mb-3 w-full">
           <Input
             id="password"
             value={password}
@@ -107,7 +107,7 @@ export default function RequestAcess() {
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
-        <div className="relative mt-1 mb-4 w-full">
+        <div className="relative mt-1 mb-3 w-full">
           <Input
             id="confirmPassword"
             value={confirmPassword}
@@ -141,7 +141,9 @@ export default function RequestAcess() {
       {error && <p className="mt-4 text-red-500">{error}</p>}
       <div className="flex flex-col items-center mt-8 font-bold whitespace-nowrap">
         <Button type="submit">Demander</Button>
-        <Button type="button" onClick={() => navigate("/")}>Annuler</Button>
+        <Button type="button" onClick={() => navigate("/")}>
+          Annuler
+        </Button>
       </div>
     </form>
   );
