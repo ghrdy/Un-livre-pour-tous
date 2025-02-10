@@ -128,7 +128,7 @@ export default function RequestAcess() {
         <label htmlFor="note" className="font-semibold text-slate-950">
           Note à l'admnistrateur (optionnel)
         </label>
-        <input
+        <Input
           id="note"
           type="text"
           value={note}
