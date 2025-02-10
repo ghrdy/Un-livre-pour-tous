@@ -95,11 +95,11 @@ export default function RequestAcess() {
             className="mt-1 mb-4"
             placeholder="Mot de passe"
             aria-label="Mot de passe"
-            type="password"
+            type={showPassword ? "text" : "password"}
           />
           <Eye
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                    onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
           />
         </div>
         <div className="relative">
@@ -110,7 +110,7 @@ export default function RequestAcess() {
             className="mt-1 mb-4"
             placeholder="Confirmer le mot de passe"
             aria-label="Confirmer le mot de passe"
-            type="password"
+            type={showPassword ? "text" : "password"}
           />
           <Eye
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
