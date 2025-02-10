@@ -62,12 +62,16 @@ export default function RequestAcess() {
         Demandez un accès
       </h1>
       <div className="flex flex-col items-end mt-8 w-80 max-w-full text-base text-slate-500">
-        <Label htmlFor="password">Nom</Label>
-        <Input id="nom" value={nom} onChange={(e) => setNom(e.target.value)} />
-        <Input id="prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)} />
-        <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Input id="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <Input id="Confirmation de mot de passe" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        <Label htmlFor="nom" className="mt-4">Nom</Label>
+        <Input id="nom" value={nom} onChange={(e) => setNom(e.target.value)} className="mt-1 mb-4" />
+        <Label htmlFor="prenom" className="mt-4">Prénom</Label>
+        <Input id="prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)} className="mt-1 mb-4" />
+        <Label htmlFor="email" className="mt-4">Email</Label>
+        <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 mb-4" />
+        <Label htmlFor="password" className="mt-4">Mot de passe</Label>
+        <Input id="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1 mb-4" />
+        <Label htmlFor="confirmPassword" className="mt-4">Confirmer le mot de passe</Label>
+        <Input id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="mt-1 mb-4" />
       </div>
       <div className="flex flex-col mt-8 w-80 max-w-full text-base">
         <label htmlFor="note" className="font-semibold text-slate-950">
