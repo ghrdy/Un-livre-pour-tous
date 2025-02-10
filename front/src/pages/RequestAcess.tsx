@@ -68,7 +68,7 @@ export default function RequestAcess() {
           id="nom"
           value={nom}
           onChange={(e) => setNom(e.target.value)}
-          className="mt-1 mb-3 w-full"
+          className=" mb-3 w-full"
           placeholder="Nom"
           aria-label="Nom"
           required
@@ -77,7 +77,7 @@ export default function RequestAcess() {
           id="prenom"
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
-          className="mt-1 mb-3 w-full"
+          className=" mb-3 w-full"
           placeholder="Prénom"
           aria-label="Prénom"
           required
@@ -86,12 +86,12 @@ export default function RequestAcess() {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 mb-3 w-full"
+          className=" mb-3 w-full"
           placeholder="Email"
           aria-label="Email"
           required
         />
-        <div className="relative mt-1 mb-3 w-full">
+        <div className="relative  mb-3 w-full">
           <Input
             id="password"
             value={password}
@@ -107,7 +107,7 @@ export default function RequestAcess() {
             onClick={() => setShowPassword(!showPassword)}
           />
         </div>
-        <div className="relative mt-1 mb-3 w-full">
+        <div className="relative mb-3 w-full">
           <Input
             id="confirmPassword"
             value={confirmPassword}
