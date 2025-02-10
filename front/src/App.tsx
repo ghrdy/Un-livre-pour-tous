@@ -21,6 +21,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
+              <Route path="/create-account" element={<CreateAccount />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/request-access" element={<RequestAcess />} />
+              <Route path="login" element={<Login />} />
               <Route
                 path="children"
                 element={
@@ -45,10 +49,6 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/create-account" element={<CreateAccount />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/request-access" element={<RequestAcess />} />
-              <Route path="login" element={<Login />} />
             </Route>
           </Routes>
           <Toaster />
