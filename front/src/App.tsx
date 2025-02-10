@@ -17,42 +17,46 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="ui-theme">
       <Router>
-        <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="/create-account" element={<CreateAccount />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/request-access" element={<RequestAcess />} />
-              <Route path="login" element={<Login />} />
-              <Route
-                path="children"
-                element={
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/request-access" element={<RequestAcess />} />
+            <Route path="login" element={<Login />} />
+            <Route
+              path="children"
+              element={
+                <AuthProvider>
                   <ProtectedRoute>
                     <ChildrenPage />
                   </ProtectedRoute>
-                }
-              />
-              <Route
-                path="books"
-                element={
+                </AuthProvider>
+              }
+            />
+            <Route
+              path="books"
+              element={
+                <AuthProvider>
                   <ProtectedRoute>
                     <BooksPage />
                   </ProtectedRoute>
-                }
-              />
-              <Route
-                path="settings"
-                element={
+                </AuthProvider>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <AuthProvider>
                   <ProtectedRoute>
                     <SettingsPage />
                   </ProtectedRoute>
-                }
-              />
-            </Route>
-          </Routes>
-          <Toaster />
-        </AuthProvider>
+                </AuthProvider>
+              }
+            />
+          </Route>
+        </Routes>
+        <Toaster />
       </Router>
     </ThemeProvider>
   );
