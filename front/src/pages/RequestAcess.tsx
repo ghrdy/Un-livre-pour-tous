@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { API_URL } from "@/lib/api/config";
+import { Label } from "@/components/ui/label";
 
 export default function RequestAcess() {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function RequestAcess() {
         Demandez un accès
       </h1>
       <div className="flex flex-col items-end mt-8 w-80 max-w-full text-base text-slate-500">
+        <Label htmlFor="password">Nom</Label>
         <Input id="nom" value={nom} onChange={(e) => setNom(e.target.value)} />
         <Input id="prenom" value={prenom} onChange={(e) => setPrenom(e.target.value)} />
         <Input id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
