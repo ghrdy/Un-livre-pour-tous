@@ -16,7 +16,7 @@ export default function RequestAcess() {
   const [note, setNote] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -87,32 +87,36 @@ export default function RequestAcess() {
           placeholder="Email"
           aria-label="Email"
         />
-        <Input
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mt-1 mb-4"
-          placeholder="Mot de passe"
-          aria-label="Mot de passe"
-          type="password"
-        />
-        <Eye
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
-        />
-        <Input
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="mt-1 mb-4"
-          placeholder="Confirmer le mot de passe"
-          aria-label="Confirmer le mot de passe"
-          type="password"
-        />
-        <Eye
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
-        />
+        <div className="relative">
+          <Input
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mt-1 mb-4"
+            placeholder="Mot de passe"
+            aria-label="Mot de passe"
+            type="password"
+          />
+          <Eye
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+          />
+        </div>
+        <div className="relative">
+          <Input
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="mt-1 mb-4"
+            placeholder="Confirmer le mot de passe"
+            aria-label="Confirmer le mot de passe"
+            type="password"
+          />
+          <Eye
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+          />
+        </div>
       </div>
       <div className="flex flex-col mt-8 w-80 max-w-full text-base">
         <label htmlFor="note" className="font-semibold text-slate-950">
