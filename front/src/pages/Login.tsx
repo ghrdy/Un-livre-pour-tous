@@ -102,7 +102,7 @@ export default function Login() {
             {error && <p className="text-sm text-red-500">{error}</p>}
             <div className="flex justify-end">
               <a
-                href="/forgot-password"
+                href="/reset-password"
                 className="text-blue-500 hover:underline"
               >
                 Mot de passe oublié ?
