@@ -16,6 +16,7 @@ export default function RequestAcess() {
   const [note, setNote] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -110,11 +111,11 @@ export default function RequestAcess() {
             className="mt-1 mb-4"
             placeholder="Confirmer le mot de passe"
             aria-label="Confirmer le mot de passe"
-            type={showPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"}
           />
           <Eye
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() => setShowConfirmPassword(!showPassword)}
           />
         </div>
       </div>
