@@ -71,6 +71,7 @@ export default function RequestAcess() {
           className="mt-1 mb-4 w-full"
           placeholder="Nom"
           aria-label="Nom"
+          required
         />
         <Input
           id="prenom"
@@ -79,6 +80,7 @@ export default function RequestAcess() {
           className="mt-1 mb-4 w-full"
           placeholder="Prénom"
           aria-label="Prénom"
+          required
         />
         <Input
           id="email"
@@ -87,6 +89,7 @@ export default function RequestAcess() {
           className="mt-1 mb-4 w-full"
           placeholder="Email"
           aria-label="Email"
+          required
         />
         <div className="relative mt-1 mb-4 w-full">
           <Input
@@ -97,6 +100,7 @@ export default function RequestAcess() {
             aria-label="Mot de passe"
             type={showPassword ? "text" : "password"}
             className="w-full"
+            required
           />
           <Eye
             className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -112,6 +116,7 @@ export default function RequestAcess() {
             aria-label="Confirmer le mot de passe"
             type={showConfirmPassword ? "text" : "password"}
             className="w-full"
+            required
           />
           <Eye
             className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
