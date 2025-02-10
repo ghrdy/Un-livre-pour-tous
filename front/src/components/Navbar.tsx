@@ -181,7 +181,7 @@ export default function Navbar() {
           )}
           {!isAuthenticated && (
             <Link to="/login" className="flex flex-col items-center">
-              <Button variant="ghost" size="icon">
+              <Button variant="custom" size="icon">
                 <LogOut className="h-5 w-5" />
               </Button>
               <span className="text-xs mt-1">Connexion</span>

@@ -117,7 +117,7 @@ export default function Login() {
       <div className="mb-4"></div>
       <h3 className="text-l">Vous n'avez pas d'acces ?</h3>
       <div className="flex justify-end">
-        <a href="/askfor-acces" className="text-blue-500 hover:underline">
+        <a href="/request-access" className="text-blue-500 hover:underline">
           Demander un accès
         </a>
       </div>
