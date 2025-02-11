@@ -68,30 +68,37 @@ export default function Login() {
       <div className="mb-4"></div>
       <h2 className="text-2xl font-semibold mb-4">Connectez vous</h2>
       <div className="mb-4"></div>
-      <div className="w-full max-w-md p-6 bg-white">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-
-          <div className="relative mb-3 w-full">
+      <div className="w-full max-w-md bg-white">
+        <form
+          onSubmit={handleSubmit}
+          className="flex overflow-hidden flex-col items-center px-4 w-full bg-white"
+        >
+          <div className="flex flex-col items-start w-80 max-w-full text-base text-slate-500">
             <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
               required
-              placeholder="Mot de passe"
+              className="mb-3 w-full"
             />
-            <Eye
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
-            />
+
+            <div className="relative mb-3 w-full">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Mot de passe"
+                className="w-full"
+              />
+              <Eye
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
           </div>
           {error && <p className="text-sm text-red-500">{error}</p>}
           <div className="flex justify-end">

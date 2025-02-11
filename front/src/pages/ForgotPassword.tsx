@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 import { toast } from "sonner";
 import { API_URL } from "@/lib/api/config";
@@ -61,12 +60,6 @@ export default function ForgotPasswordPage() {
         className="space-y-4 w-full max-w-md"
       >
         <div className="space-y-2">
-          <Label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Email
-          </Label>
           <div className="flex flex-col items-center mt-8 w-full text-base text-slate-500">
             <Input
               id="email"
@@ -74,6 +67,7 @@ export default function ForgotPasswordPage() {
               value={email}
               onChange={handleEmailChange}
               required
+              placeholder="Adresse email"
               className="w-full mb-8"
             />
           </div>
