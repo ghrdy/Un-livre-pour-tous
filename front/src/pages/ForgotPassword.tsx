@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
-      <Logo className="inline-block h-22 w-22 mb-2" />
+      <Logo className="object-contain w-24 aspect-square" />
       <div className="text-center mb-4">
         <h2 className="text-2xl font-semibold text-gray-900">
           Mot de passe oublié
