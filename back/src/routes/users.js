@@ -111,6 +111,36 @@ router.post("/set-password", async (req, res) => {
   }
 });
 
+router.post("forgot-password", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.SECRET_KEY,
+      { expiresIn: "1h" }
+    );
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: user.email,
+      subject: "Réinitialisation de mot de passe : Un Livre Pour Tous",
+      html: `<p>Cliquez sur le lien pour réinitialiser votre mot de passe : </p>
+             <a href="http://104.248.16.166/reset-password">Réinitialiser votre mot de passe</a>`,
+    };
+
 // Protected routes (authentication required)
 router.use(authToken);
 
