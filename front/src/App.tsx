@@ -12,7 +12,9 @@ import { AuthProvider } from "@/components/AuthProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ResetPassword from "@/pages/ResetPassword";
 import RequestAcess from "@/pages/RequestAcess";
+import RequestAcessConfirmation from "@/pages/RequestAcessConfirmation";
 import ForgotPassword from "@/pages/ForgotPassword";
+import ResetPasswordConfirmation from "./pages/ResetPasswordConfirmation";
 
 function App() {
   return (
@@ -24,6 +26,14 @@ function App() {
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route
+              path="/reset-password-confirmation"
+              element={<ResetPasswordConfirmation />}
+            />
+            <Route
+              path="/request-access-confirmation"
+              element={<RequestAcessConfirmation />}
+            />
             <Route path="/request-access" element={<RequestAcess />} />
             <Route path="login" element={<Login />} />
             <Route
