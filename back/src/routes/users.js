@@ -12,8 +12,8 @@ dotenv.config();
 const router = express.Router();
 const secretKey = process.env.SECRET_KEY; // Replace with your actual secret key
 const refreshTokenSecret = process.env.REFRESH_SECRET_KEY;
+const frontendURL = process.env.FRONTEND_URL;
 
-console.log(process.env.SECRET_KEY);
 // Login a user
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -111,7 +111,7 @@ router.post("/set-password", async (req, res) => {
   }
 });
 
-router.post("forgot-password", async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
@@ -138,8 +138,10 @@ router.post("forgot-password", async (req, res) => {
       to: user.email,
       subject: "Réinitialisation de mot de passe : Un Livre Pour Tous",
       html: `<p>Cliquez sur le lien pour réinitialiser votre mot de passe : </p>
-             <a href="http://104.248.16.166/reset-password">Réinitialiser votre mot de passe</a>`,
+             <a href="${frontendURL}/reset-password?token=${token}">Réinitialiser votre mot de passe</a>`,
     };
+    await transporter.sendMail(mailOptions);
+    res.json({ message: "Email de réinitialisation envoyé" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -182,7 +184,7 @@ router.post("/add", isAdmin, async (req, res) => {
       to: savedUser.email,
       subject: "Création de compte : Un Livre Pour Tous",
       html: `<p>Cliquez sur le lien pour définir votre mot de passe. : </p>
-             <a href="http://104.248.16.166/create-account?token=${token}">Créer Votre Compte</a>`,
+             <a href="${frontendURL}/create-account?token=${token}">Créer Votre Compte</a>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -294,7 +296,7 @@ router.post("/reset-password", isAdmin, async (req, res) => {
       to: user.email,
       subject: "Réinitialisation de mot de passe : Un Livre Pour Tous",
       html: `<p>Cliquez sur le lien pour réinitialiser votre mot de passe : </p>
-             <a href="http://104.248.16.166/reset-password?token=${token}">Réinitialiser votre mot de passe</a>`,
+             <a href="${frontendURL}/reset-password?token=${token}">Réinitialiser votre mot de passe</a>`,
     };
 
     await transporter.sendMail(mailOptions);
