@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { toast } from "sonner";
-import { API_URL } from "@/lib/api/config";
+//import { API_URL } from "@/lib/api/config";
 import Logo from "../assets/Logo.svg?react";
 
 export default function ForgotPasswordPage() {
@@ -19,20 +19,6 @@ export default function ForgotPasswordPage() {
   const handleResetPassword = async () => {
     setError("");
     try {
-      const response = await fetch(`${API_URL}/users/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to reset password");
-      }
-
-      toast.success("Password reset email sent successfully");
       navigate("/reset-password-confirmation");
     } catch (err: any) {
       setError(err.message);
