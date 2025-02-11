@@ -33,7 +33,7 @@ export default function ForgotPasswordPage() {
       }
 
       toast.success("Password reset email sent successfully");
-      navigate("/login");
+      navigate("/reset-password-confirmation");
     } catch (err: any) {
       setError(err.message);
       toast.error(err.message);
