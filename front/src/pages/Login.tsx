@@ -63,7 +63,7 @@ export default function Login() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex overflow-hidden flex-col items-center px-4 pb-5 w-full bg-white"
+      className="flex overflow-hidden flex-col items-center px-4 pb-5 pt-5 w-full bg-white"
     >
       <Logo className="object-contain w-24 aspect-square" />
       <h1 className="mt-8 text-2xl font-semibold text-center text-slate-950">
