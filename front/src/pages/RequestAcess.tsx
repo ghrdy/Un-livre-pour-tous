@@ -139,7 +139,7 @@ export default function RequestAcess() {
         <Button type="submit" variant="custom" className="custom-button-width">
           Demander
         </Button>
-        <a href="/" className="mt-3 text-blue-500 hover:underline">
+        <a href="/login" className="mt-3 text-blue-500 hover:underline">
           Annuler
         </a>
       </div>
