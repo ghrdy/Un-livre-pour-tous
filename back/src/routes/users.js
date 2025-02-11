@@ -140,6 +140,10 @@ router.post("forgot-password", async (req, res) => {
       html: `<p>Cliquez sur le lien pour réinitialiser votre mot de passe : </p>
              <a href="http://104.248.16.166/reset-password">Réinitialiser votre mot de passe</a>`,
     };
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Protected routes (authentication required)
 router.use(authToken);
