@@ -173,3 +173,13 @@
 .hover\:bg-custom\/90:hover {
   background-color: #1e6fa1; /* Adjust the hover color as needed */
 }
+
+.custom-button-width {
+  width: 130px;
+  height: 56px;
+}
+
+.custom-button-width2 {
+  width: 141px;
+  height: 56px;
+}

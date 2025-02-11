@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { API_URL } from "@/lib/api/config";
+import Logo from "../assets/Logo.svg?react";
 import Eye from "../assets/Eye.svg?react";
 
 export default function RequestAcess() {
@@ -52,14 +53,9 @@ export default function RequestAcess() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex overflow-hidden flex-col items-center px-4 pt-11 pb-5 w-full bg-white"
+      className="flex overflow-hidden flex-col items-center px-4 pb-5 w-full bg-white"
     >
-      <img
-        loading="lazy"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/843e94badbe37ea228d302851b473ed9c4666e05bbab1b7775efa0a2208a4334?placeholderIfAbsent=true&apiKey=00033926861842f2a59f2f6802cccc90"
-        alt=""
-        className="object-contain w-24 aspect-square"
-      />
+      <Logo className="object-contain w-24 aspect-square" />
       <h1 className="mt-8 text-2xl font-semibold text-center text-slate-950">
         Demandez un accès
       </h1>
@@ -133,17 +129,19 @@ export default function RequestAcess() {
           type="text"
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          className="w-full"
+          className="w-full mt-2"
           placeholder="Note"
           aria-label="Note à l'admnistrateur (optionnel)"
         />
       </div>
       {error && <p className="mt-4 text-red-500">{error}</p>}
       <div className="flex flex-col items-center mt-8 font-bold whitespace-nowrap">
-        <Button type="submit">Demander</Button>
-        <Button type="button" onClick={() => navigate("/")}>
-          Annuler
+        <Button type="submit" variant="custom" className="custom-button-width">
+          Demander
         </Button>
+        <a href="/" className="mt-3 text-blue-500 hover:underline">
+          Annuler
+        </a>
       </div>
     </form>
   );

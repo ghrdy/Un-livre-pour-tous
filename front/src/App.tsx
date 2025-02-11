@@ -12,6 +12,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ResetPassword from "@/pages/ResetPassword";
 import RequestAcess from "@/pages/RequestAcess";
+import ForgotPassword from "@/pages/ForgotPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/request-access" element={<RequestAcess />} />
             <Route path="login" element={<Login />} />
