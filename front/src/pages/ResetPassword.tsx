@@ -50,7 +50,7 @@ export default function ResetPassword() {
         throw new Error(errorData.message || "Failed to set password");
       }
 
-      toast.success("Le nouveau mot de passe a été enregistré avec succès");
+      toast.success("Le mot de passe a été réinitialisé avec succès");
       navigate("/login");
     } catch (error) {
       toast.error(

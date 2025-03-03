@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
 import Logo from "../assets/Logo.svg?react";
 import { AdminDashboard } from "@/components/admin/AdminDashboard";
+import { ProjectSelector } from "@/components/ProjectSelector";
+import { useProjectStore } from "@/lib/stores/projectStore";
 
 export default function HomePage() {
   const { isAuthenticated, user } = useAuth();
   const isAdmin = user?.role === "admin";
+  const { activeProject } = useProjectStore();
 
   return (
     <div className="min-h-[80vh] flex flex-col justify-center space-y-12">
@@ -26,6 +29,19 @@ export default function HomePage() {
                 Commencer
               </Button>
             </Link>
+          </div>
+        )}
+
+        {isAuthenticated && (
+          <div className="flex flex-col items-center space-y-4">
+            <h2 className="text-xl font-semibold">Sélectionner un projet</h2>
+            <ProjectSelector />
+            {activeProject && (
+              <div className="mt-4 p-4 bg-card rounded-lg border max-w-md">
+                <h3 className="font-semibold text-lg">{activeProject.nom}</h3>
+                <p className="text-muted-foreground">Année: {activeProject.annee}</p>
+              </div>
+            )}
           </div>
         )}
       </section>

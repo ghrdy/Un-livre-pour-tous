@@ -37,9 +37,12 @@ import { useModalStore } from "@/lib/stores/modalStore";
 import { BooksList } from "./BooksList";
 import { BookDetailView } from "./BookDetailView";
 import { API_URL } from "@/lib/api/config";
+import { useProjectStore } from "@/lib/stores/projectStore";
+import { getProjectBooks } from "@/lib/api/projects";
 
 export default function BooksManagement() {
   const { accessToken } = useAuth();
+  const { activeProject } = useProjectStore();
   const [books, setBooks] = useState<Book[]>([]);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,7 +56,17 @@ export default function BooksManagement() {
   const fetchBooks = async () => {
     try {
       if (!accessToken) return;
-      const fetchedBooks = await getBooks(accessToken);
+      
+      let fetchedBooks: Book[];
+      
+      // If we have an active project, fetch books for that project
+      if (activeProject) {
+        fetchedBooks = await getProjectBooks(activeProject._id, accessToken);
+      } else {
+        // Otherwise, fetch all books
+        fetchedBooks = await getBooks(accessToken);
+      }
+      
       setBooks(fetchedBooks);
       setFilteredBooks(fetchedBooks);
     } catch (error) {
@@ -63,7 +76,7 @@ export default function BooksManagement() {
 
   useEffect(() => {
     fetchBooks();
-  }, [accessToken]);
+  }, [accessToken, activeProject]);
 
   useEffect(() => {
     const filtered = books.filter((book) =>
@@ -118,6 +131,11 @@ export default function BooksManagement() {
             />
           </div>
         </div>
+        {activeProject && (
+          <div className="text-sm text-muted-foreground ml-4">
+            Projet actif: {activeProject.nom} ({activeProject.annee})
+          </div>
+        )}
       </CardHeader>
       <CardContent>
         {/* Table pour mobile */}

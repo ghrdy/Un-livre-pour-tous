@@ -8,11 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Project, updateProject } from "@/lib/api/projects";
 import { useAuth } from "@/lib/auth";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { API_URL } from "@/lib/api/config";
+import { getUsers, User } from "@/lib/api/users";
 
 interface EditProjectDialogProps {
   project: Project;
@@ -32,7 +33,35 @@ export default function EditProjectDialog({
     nom: project.nom,
     annee: project.annee,
     image: null as File | null,
+    animateurs: project.animateurs || [],
   });
+  const [users, setUsers] = useState<User[]>([]);
+  const [selectedAnimateurs, setSelectedAnimateurs] = useState<string[]>(
+    project.animateurs || []
+  );
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        if (!accessToken) return;
+        const fetchedUsers = await getUsers(accessToken);
+        setUsers(fetchedUsers);
+      } catch (error) {
+        toast.error("Échec du chargement des utilisateurs");
+      }
+    };
+
+    if (open) {
+      fetchUsers();
+      setFormData({
+        nom: project.nom,
+        annee: project.annee,
+        image: null,
+        animateurs: project.animateurs || [],
+      });
+      setSelectedAnimateurs(project.animateurs || []);
+    }
+  }, [open, accessToken, project]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,6 +73,7 @@ export default function EditProjectDialog({
       if (formData.image) {
         formDataToSend.append("photo", formData.image);
       }
+      formDataToSend.append("animateurs", JSON.stringify(selectedAnimateurs));
 
       if (!accessToken) {
         throw new Error("No access token available");
@@ -65,6 +95,14 @@ export default function EditProjectDialog({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFormData({ ...formData, image: e.target.files[0] });
+    }
+  };
+
+  const handleAnimateurChange = (userId: string) => {
+    if (selectedAnimateurs.includes(userId)) {
+      setSelectedAnimateurs(selectedAnimateurs.filter((id) => id !== userId));
+    } else {
+      setSelectedAnimateurs([...selectedAnimateurs, userId]);
     }
   };
 
@@ -123,6 +161,25 @@ export default function EditProjectDialog({
               accept="image/*"
               onChange={handleFileChange}
             />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="animateurs">Animateurs</Label>
+            <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto">
+              {users.map((user) => (
+                <div key={user._id} className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id={`user-${user._id}`}
+                    checked={selectedAnimateurs.includes(user._id)}
+                    onChange={() => handleAnimateurChange(user._id)}
+                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                  />
+                  <label htmlFor={`user-${user._id}`} className="text-sm">
+                    {user.prenom} {user.nom} ({user.role})
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
           <Button type="submit" className="w-full">
             Mettre à jour le projet

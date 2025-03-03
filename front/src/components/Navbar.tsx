@@ -10,6 +10,7 @@ import BooksIcon from "../assets/Books.svg?react";
 import UsersIcon from "../assets/UsersThree.svg?react";
 import GearIcon from "../assets/Gear.svg?react";
 import { API_URL } from "@/lib/api/config";
+import { ProjectSwitcher } from "./ProjectSwitcher";
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -102,6 +103,7 @@ export default function Navbar() {
                 </>
               )}
             </div>
+            {isAuthenticated && <ProjectSwitcher />}
           </div>
           <div className="flex items-center space-x-4">
             <ModeToggle />

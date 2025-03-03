@@ -44,9 +44,12 @@ import { ChildrenList } from "./ChildrenList";
 import { ChildDetailView } from "./child-detail/ChildDetailView";
 import { updateChildProfile } from "@/lib/api/children";
 import { API_URL } from "@/lib/api/config";
+import { useProjectStore } from "@/lib/stores/projectStore";
+import { getProjectChildren } from "@/lib/api/projects";
 
 export default function ChildrenManagement() {
   const { accessToken } = useAuth();
+  const { activeProject } = useProjectStore();
   const [children, setChildren] = useState<ChildProfile[]>([]);
   const [filteredChildren, setFilteredChildren] = useState<ChildProfile[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,9 +64,20 @@ export default function ChildrenManagement() {
   const fetchChildren = async () => {
     try {
       if (!accessToken) return;
-      const fetchedChildren = await getChildProfiles(accessToken);
+      
+      let fetchedChildren: ChildProfile[];
+      
+      // If we have an active project, fetch children for that project
+      if (activeProject) {
+        fetchedChildren = await getProjectChildren(activeProject._id, accessToken);
+      } else {
+        // Otherwise, fetch all children
+        fetchedChildren = await getChildProfiles(accessToken);
+      }
+      
       setChildren(fetchedChildren);
       setFilteredChildren(fetchedChildren);
+      
       // Refresh the status of each child
       fetchedChildren.forEach((child) => {
         refreshChildStatus(child._id);
@@ -94,7 +108,7 @@ export default function ChildrenManagement() {
 
   useEffect(() => {
     fetchChildren();
-  }, [accessToken]);
+  }, [accessToken, activeProject]);
 
   useEffect(() => {
     const filtered = children.filter((child) => {
@@ -228,6 +242,11 @@ export default function ChildrenManagement() {
             />
           </div>
         </div>
+        {activeProject && (
+          <div className="text-sm text-muted-foreground">
+            Projet actif: {activeProject.nom} ({activeProject.annee})
+          </div>
+        )}
       </CardHeader>
       <CardContent>
         {/* Table pour mobile */}
