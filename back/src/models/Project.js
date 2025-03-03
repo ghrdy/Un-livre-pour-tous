@@ -19,6 +19,18 @@ const projectSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  books: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Book",
+    },
+  ],
+  children: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ChildProfile",
+    },
+  ],
   projet: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
