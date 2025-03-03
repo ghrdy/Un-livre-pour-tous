@@ -14,7 +14,7 @@ import { toast } from "sonner";
 export function ProjectSelector() {
   const { accessToken } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
-  const { activeProject, setActiveProject } = useProjectStore();
+  const { activeProject, setActiveProject, clearActiveProject } = useProjectStore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,6 +42,12 @@ export function ProjectSelector() {
   }, [accessToken, activeProject, setActiveProject]);
 
   const handleProjectChange = (projectId: string) => {
+    if (projectId === "all") {
+      clearActiveProject();
+      toast.success("Affichage de tous les éléments");
+      return;
+    }
+    
     const selectedProject = projects.find((project) => project._id === projectId);
     if (selectedProject) {
       setActiveProject(selectedProject);
@@ -60,13 +66,14 @@ export function ProjectSelector() {
   return (
     <div className="w-full max-w-xs">
       <Select
-        value={activeProject?._id}
+        value={activeProject?._id || "all"}
         onValueChange={handleProjectChange}
       >
         <SelectTrigger className="w-full">
           <SelectValue placeholder="Sélectionner un projet" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="all">Tout voir</SelectItem>
           {projects.map((project) => (
             <SelectItem key={project._id} value={project._id}>
               {project.nom} ({project.annee})

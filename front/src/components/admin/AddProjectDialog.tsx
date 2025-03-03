@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import { createProject } from "@/lib/api/projects";
 import { useAuth } from "@/lib/auth";
 import { getUsers, User } from "@/lib/api/users";
+import { Search, X } from "lucide-react";
 
 interface AddProjectDialogProps {
   open: boolean;
@@ -32,6 +33,9 @@ export default function AddProjectDialog({
   });
   const [users, setUsers] = useState<User[]>([]);
   const [selectedAnimateurs, setSelectedAnimateurs] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -53,8 +57,26 @@ export default function AddProjectDialog({
         image: null,
       });
       setSelectedAnimateurs([]);
+      setSelectedUsers([]);
+      setSearchQuery("");
     }
   }, [open, accessToken]);
+
+  useEffect(() => {
+    // Filter users based on search query
+    if (searchQuery.trim() === "") {
+      setFilteredUsers([]);
+    } else {
+      const filtered = users.filter(
+        user => 
+          !selectedAnimateurs.includes(user._id) && 
+          (user.nom.toLowerCase().includes(searchQuery.toLowerCase()) || 
+           user.prenom.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           user.email.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+      setFilteredUsers(filtered);
+    }
+  }, [searchQuery, users, selectedAnimateurs]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,6 +104,7 @@ export default function AddProjectDialog({
         image: null,
       });
       setSelectedAnimateurs([]);
+      setSelectedUsers([]);
     } catch (error) {
       toast.error(
         error instanceof Error
@@ -97,12 +120,17 @@ export default function AddProjectDialog({
     }
   };
 
-  const handleAnimateurChange = (userId: string) => {
-    if (selectedAnimateurs.includes(userId)) {
-      setSelectedAnimateurs(selectedAnimateurs.filter(id => id !== userId));
-    } else {
-      setSelectedAnimateurs([...selectedAnimateurs, userId]);
+  const addUser = (user: User) => {
+    if (!selectedAnimateurs.includes(user._id)) {
+      setSelectedAnimateurs([...selectedAnimateurs, user._id]);
+      setSelectedUsers([...selectedUsers, user]);
+      setSearchQuery("");
     }
+  };
+
+  const removeUser = (userId: string) => {
+    setSelectedAnimateurs(selectedAnimateurs.filter(id => id !== userId));
+    setSelectedUsers(selectedUsers.filter(user => user._id !== userId));
   };
 
   return (
@@ -146,21 +174,65 @@ export default function AddProjectDialog({
           </div>
           <div className="space-y-2">
             <Label htmlFor="animateurs">Animateurs</Label>
-            <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto">
-              {users.map((user) => (
-                <div key={user._id} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id={`user-${user._id}`}
-                    checked={selectedAnimateurs.includes(user._id)}
-                    onChange={() => handleAnimateurChange(user._id)}
-                    className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-                  />
-                  <label htmlFor={`user-${user._id}`} className="text-sm">
-                    {user.prenom} {user.nom} ({user.role})
-                  </label>
-                </div>
-              ))}
+            <div className="relative">
+              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Rechercher un utilisateur..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-8"
+              />
+            </div>
+            
+            {/* Search results */}
+            {filteredUsers.length > 0 && (
+              <div className="border rounded-md mt-1 max-h-40 overflow-y-auto">
+                {filteredUsers.map(user => (
+                  <div 
+                    key={user._id} 
+                    className="p-2 hover:bg-muted cursor-pointer flex items-center justify-between"
+                    onClick={() => addUser(user)}
+                  >
+                    <div>
+                      <span className="font-medium">{user.prenom} {user.nom}</span>
+                      <span className="text-xs text-muted-foreground ml-2">({user.role})</span>
+                    </div>
+                    <Button variant="ghost" size="sm" onClick={(e) => {
+                      e.stopPropagation();
+                      addUser(user);
+                    }}>
+                      Ajouter
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {/* Selected users */}
+            <div className="mt-2">
+              <h4 className="text-sm font-medium mb-1">Utilisateurs sélectionnés:</h4>
+              <div className="space-y-1 max-h-40 overflow-y-auto">
+                {selectedUsers.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">Aucun utilisateur sélectionné</p>
+                ) : (
+                  selectedUsers.map(user => (
+                    <div key={user._id} className="flex items-center justify-between bg-muted p-2 rounded-md">
+                      <div>
+                        <span className="font-medium">{user.prenom} {user.nom}</span>
+                        <span className="text-xs text-muted-foreground ml-2">({user.role})</span>
+                      </div>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => removeUser(user._id)}
+                        className="h-8 w-8 p-0"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
           <Button type="submit" className="w-full">

@@ -82,7 +82,7 @@ export default function HomePage() {
 
       {/* Desktop View */}
       <div className="hidden md:block max-w-6xl mx-auto px-4 w-full">
-        {isAuthenticated && isAdmin ? <AdminDashboard /> : null}
+        {isAuthenticated && <AdminDashboard />}
       </div>
     </div>
   );
