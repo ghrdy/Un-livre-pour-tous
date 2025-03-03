@@ -11,11 +11,13 @@ import UsersIcon from "../assets/UsersThree.svg?react";
 import GearIcon from "../assets/Gear.svg?react";
 import { API_URL } from "@/lib/api/config";
 import { ProjectSwitcher } from "./ProjectSwitcher";
+import { useProjectStore } from "@/lib/stores/projectStore";
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { activeProject } = useProjectStore();
 
   const handleLogout = async () => {
     try {
@@ -103,7 +105,19 @@ export default function Navbar() {
                 </>
               )}
             </div>
-            {isAuthenticated && <ProjectSwitcher />}
+            {isAuthenticated && (
+              <>
+                {user?.role === "admin" ? (
+                  <ProjectSwitcher />
+                ) : (
+                  activeProject && (
+                    <div className="text-sm text-muted-foreground">
+                      Projet: {activeProject.nom} ({activeProject.annee})
+                    </div>
+                  )
+                )}
+              </>
+            )}
           </div>
           <div className="flex items-center space-x-4">
             <ModeToggle />

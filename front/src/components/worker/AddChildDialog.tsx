@@ -12,6 +12,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { createChildProfile } from "@/lib/api/children";
 import { useAuth } from "@/lib/auth";
+import { useProjectStore } from "@/lib/stores/projectStore";
+import { API_URL } from "@/lib/api/config";
 
 interface AddChildDialogProps {
   open: boolean;
@@ -25,6 +27,7 @@ export default function AddChildDialog({
   onChildAdded,
 }: AddChildDialogProps) {
   const { accessToken } = useAuth();
+  const { activeProject } = useProjectStore();
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -52,7 +55,39 @@ export default function AddChildDialog({
         formDataToSend.append("photo", formData.photo);
       }
 
-      await createChildProfile(formDataToSend, accessToken);
+      // Create the child profile
+      const childProfile = await createChildProfile(
+        formDataToSend,
+        accessToken
+      );
+
+      // If we have an active project, add the child to the project
+      if (activeProject && childProfile._id) {
+        try {
+          const response = await fetch(
+            `${API_URL}/projects/${activeProject._id}/children`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Cookie: `accessToken=${accessToken}`,
+              },
+              credentials: "include",
+              body: JSON.stringify({ childIds: [childProfile._id] }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to add child to project");
+          }
+        } catch (error) {
+          console.error("Error adding child to project:", error);
+          toast.error(
+            "L'enfant a été créé mais n'a pas pu être ajouté au projet"
+          );
+        }
+      }
+
       toast.success("Le profil enfant est ajouté");
       onChildAdded();
       onOpenChange(false);

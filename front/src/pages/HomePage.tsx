@@ -34,13 +34,18 @@ export default function HomePage() {
 
         {isAuthenticated && (
           <div className="flex flex-col items-center space-y-4">
-            <h2 className="text-xl font-semibold">Sélectionner un projet</h2>
-            <ProjectSelector />
-            {activeProject && (
-              <div className="mt-4 p-4 bg-card rounded-lg border max-w-md">
-                <h3 className="font-semibold text-lg">{activeProject.nom}</h3>
-                <p className="text-muted-foreground">Année: {activeProject.annee}</p>
-              </div>
+            {isAdmin ? (
+              <>
+                <h2 className="text-xl font-semibold">Sélectionner un projet</h2>
+                <ProjectSelector />
+              </>
+            ) : (
+              activeProject && (
+                <div className="mt-4 p-4 bg-card rounded-lg border max-w-md md:block">
+                  <h3 className="font-semibold text-lg">{activeProject.nom}</h3>
+                  <p className="text-muted-foreground">Année: {activeProject.annee}</p>
+                </div>
+              )
             )}
           </div>
         )}

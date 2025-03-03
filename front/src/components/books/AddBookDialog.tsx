@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { createBook } from "@/lib/api/books";
 import { useAuth } from "@/lib/auth";
+import { useProjectStore } from "@/lib/stores/projectStore";
+import { API_URL } from "@/lib/api/config";
 
 interface AddBookDialogProps {
   open: boolean;
@@ -24,6 +26,7 @@ export default function AddBookDialog({
   onBookAdded,
 }: AddBookDialogProps) {
   const { accessToken } = useAuth();
+  const { activeProject } = useProjectStore();
   const [formData, setFormData] = useState({
     titre: "",
     photo: null as File | null,
@@ -43,7 +46,31 @@ export default function AddBookDialog({
         formDataToSend.append("photo", formData.photo);
       }
 
-      await createBook(formDataToSend, accessToken);
+      // Create the book
+      const book = await createBook(formDataToSend, accessToken);
+
+      // If we have an active project, add the book to the project
+      if (activeProject && book._id) {
+        try {
+          const response = await fetch(`${API_URL}/projects/${activeProject._id}/books`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Cookie': `accessToken=${accessToken}`,
+            },
+            credentials: 'include',
+            body: JSON.stringify({ bookIds: [book._id] }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to add book to project");
+          }
+        } catch (error) {
+          console.error("Error adding book to project:", error);
+          toast.error("Le livre a été créé mais n'a pas pu être ajouté au projet");
+        }
+      }
+
       toast.success("Le livre a été ajouté");
       onBookAdded();
       onOpenChange(false);
